@@ -1,12 +1,19 @@
-Check by using these in browser after you have this folder in your machine:
+## 🚀 Run the Project
 
-localhost:5173/login
-localhost:5173/register
-localhost:5173/dashboard
-localhost:5173/resume
-localhost:5173/interview
-localhost:5173/quiz
-localhost:5173/leaderboard
-localhost:5173/admin
-Check both /admin/reports and /admin/company-jd bhai
+After cloning the repository and starting the development server, open the following routes in your browser to test the application:
 
+- http://localhost:5173/login
+- http://localhost:5173/register
+- http://localhost:5173/dashboard
+- http://localhost:5173/resume
+- http://localhost:5173/interview
+- http://localhost:5173/quiz
+- http://localhost:5173/leaderboard
+- http://localhost:5173/admin
+
+### Admin Routes
+
+Also make sure to test these admin pages:
+
+- http://localhost:5173/admin/reports
+- http://localhost:5173/admin/company-jd
