@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowRight, Trophy, Zap } from 'lucide-react'
 
 const tabs = ['Quiz', 'Snippet']
 
 const data = {
   Quiz: [
-    { rank: 1, name: 'Riya Sharma', college: 'GPCET', score: 2840, streak: 14, badge: '🥇' },
-    { rank: 2, name: 'Karthik M', college: 'GPCET', score: 2610, streak: 11, badge: '🥈' },
-    { rank: 3, name: 'Asad Ahmed', college: 'GPCET', score: 2390, streak: 7, badge: '🥉' },
+    { rank: 1, name: 'Riya Sharma', college: 'GPCET', score: 2840, streak: 14, badge: '' },
+    { rank: 2, name: 'Karthik M', college: 'GPCET', score: 2610, streak: 11, badge: '' },
+    { rank: 3, name: 'Asad Ahmed', college: 'GPCET', score: 2390, streak: 7, badge: '' },
     { rank: 4, name: 'Priya K', college: 'GPCET', score: 2100, streak: 9, badge: '' },
     { rank: 5, name: 'Rahul T', college: 'GPCET', score: 1980, streak: 5, badge: '' },
     { rank: 6, name: 'Sneha R', college: 'GPCET', score: 1820, streak: 3, badge: '' },
@@ -15,9 +16,9 @@ const data = {
     { rank: 8, name: 'Divya N', college: 'GPCET', score: 1540, streak: 2, badge: '' },
   ],
   Snippet: [
-    { rank: 1, name: 'Karthik M', college: 'GPCET', score: 3100, streak: 11, badge: '🥇' },
-    { rank: 2, name: 'Asad Ahmed', college: 'GPCET', score: 2750, streak: 7, badge: '🥈' },
-    { rank: 3, name: 'Riya Sharma', college: 'GPCET', score: 2500, streak: 14, badge: '🥉' },
+    { rank: 1, name: 'Karthik M', college: 'GPCET', score: 3100, streak: 11, badge: '' },
+    { rank: 2, name: 'Asad Ahmed', college: 'GPCET', score: 2750, streak: 7, badge: '' },
+    { rank: 3, name: 'Riya Sharma', college: 'GPCET', score: 2500, streak: 14, badge: '' },
     { rank: 4, name: 'Arjun P', college: 'GPCET', score: 2200, streak: 6, badge: '' },
     { rank: 5, name: 'Priya K', college: 'GPCET', score: 1950, streak: 9, badge: '' },
     { rank: 6, name: 'Rahul T', college: 'GPCET', score: 1800, streak: 5, badge: '' },
@@ -40,13 +41,13 @@ export default function Leaderboard() {
       <nav style={{
         padding: '1rem 2.5rem', borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(15,23,35,0.95)', backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)',
         position: 'sticky', top: 0, zIndex: 100,
       }}>
         <Link to="/" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff' }}>
           Resume<span style={{ color: 'var(--accent)' }}>AI</span>
         </Link>
-        <Link to="/dashboard"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>← Dashboard</button></Link>
+        <Link to="/dashboard"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>Dashboard</button></Link>
       </nav>
 
       <div style={{ maxWidth: 720, margin: '0 auto', padding: '2.5rem 2rem' }} className="page-enter">
@@ -76,11 +77,13 @@ export default function Leaderboard() {
               }}>A</div>
               <div>
                 <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>Your rank — #{myRow.rank}</div>
-                <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{myRow.score} points · {myRow.streak}🔥 streak</div>
+                <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{myRow.score} points · {myRow.streak} day streak</div>
               </div>
             </div>
             <Link to="/quiz">
-              <button className="btn-primary" style={{ fontSize: 12, padding: '7px 16px' }}>Improve rank →</button>
+              <button className="btn-primary" style={{ fontSize: 12, padding: '7px 16px', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>Improve rank
+                <ArrowRight size={14} />
+              </button>
             </Link>
           </div>
         )}
@@ -115,14 +118,16 @@ export default function Leaderboard() {
               transform: i === 0 ? 'scale(1.03)' : 'scale(1)',
               transition: 'transform 0.2s',
             }}>
-              <div style={{ fontSize: 28, marginBottom: '0.4rem' }}>{r.badge}</div>
+              <div style={{ fontSize: 28, marginBottom: '0.4rem', display: 'flex', justifyContent: 'center' }}>
+                <Trophy size={28} color={['#D4AF37', '#C0C0C0', '#CD7F32'][i]} />
+            </div>
               <div style={{
                 width: 38, height: 38, borderRadius: '50%', margin: '0 auto 0.5rem',
                 background: i === 0 ? 'rgba(255,193,7,0.15)' : 'var(--bg-hover)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 13, fontWeight: 700,
                 color: i === 0 ? '#FFC107' : 'var(--text-secondary)',
-              }}>{r.name.split(' ').map(n => n[0]).join('')}</div>
+              }}>{i + 1}</div>
               <div style={{ fontSize: 13, fontWeight: 700, color: r.name === ME ? 'var(--accent)' : 'var(--text-primary)', marginBottom: '0.2rem' }}>
                 {r.name === ME ? 'You' : r.name.split(' ')[0]}
               </div>
@@ -185,8 +190,9 @@ export default function Leaderboard() {
               <div style={{ textAlign: 'right', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 14, color: 'var(--text-primary)' }}>
                 {r.score.toLocaleString()}
               </div>
-              <div style={{ textAlign: 'right', fontSize: 13, color: 'var(--text-muted)' }}>
-                {r.streak}🔥
+              <div style={{ textAlign: 'right', fontSize: 13, color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.25rem', justifyItems: 'flex-end' }}>
+                <Zap size={14} />
+                {r.streak}
               </div>
             </div>
           ))}

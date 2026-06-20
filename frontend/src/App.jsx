@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -12,8 +13,23 @@ import StudentReports from './pages/admin/StudentReports'
 import CompanyJD from './pages/admin/CompanyJD'
 
 export default function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light')
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
   return (
     <BrowserRouter>
+      <button
+        className="theme-toggle"
+        onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+        aria-label="Toggle dark mode"
+      >
+        {theme === 'light' ? 'Dark mode' : 'Light mode'}
+      </button>
+
       <Routes>
         <Route path="/"                    element={<Landing />} />
         <Route path="/login"               element={<Login />} />
@@ -26,6 +42,17 @@ export default function App() {
         <Route path="/admin"               element={<AdminDashboard />} />
         <Route path="/admin/reports"       element={<StudentReports />} />
         <Route path="/admin/company-jd"    element={<CompanyJD />} />
+
+        <Route path="/StudentDashboard" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/ResumeUpload" element={<Navigate to="/resume" replace />} />
+        <Route path="/MockInterview" element={<Navigate to="/interview" replace />} />
+        <Route path="/admin/AdminDashboard" element={<Navigate to="/admin" replace />} />
+        <Route path="/admindashboard" element={<Navigate to="/admin" replace />} />
+        <Route path="/admin/StudentReports" element={<Navigate to="/admin/reports" replace />} />
+        <Route path="/admin/admin/StudentReports" element={<Navigate to="/admin/reports" replace />} />
+        <Route path="/admin/CompanyJD" element={<Navigate to="/admin/company-jd" replace />} />
+        <Route path="/admin/admin/CompanyJD" element={<Navigate to="/admin/company-jd" replace />} />
+        <Route path="/CompanyJD" element={<Navigate to="/admin/company-jd" replace />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowRight, X } from 'lucide-react'
 
 const initialJDs = [
   { id: 1, company: 'TCS', role: 'Software Engineer', type: 'Fresher', deadline: '2026-06-25', tags: ['Python', 'SQL', 'OOPs'], jd: 'Looking for fresh graduates with strong Python and SQL fundamentals...' },
@@ -34,14 +35,14 @@ export default function CompanyJD() {
       <nav style={{
         padding: '1rem 2.5rem', borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(15,23,35,0.95)', backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)',
         position: 'sticky', top: 0, zIndex: 100,
       }}>
         <Link to="/" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff' }}>
           Resume<span style={{ color: 'var(--accent)' }}>AI</span>
           <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginLeft: 8 }}>Admin</span>
         </Link>
-        <Link to="/admin"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>← Dashboard</button></Link>
+        <Link to="/admin"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>Dashboard</button></Link>
       </nav>
 
       <div style={{ maxWidth: 860, margin: '0 auto', padding: '2.5rem 2rem' }} className="page-enter">
@@ -54,8 +55,9 @@ export default function CompanyJD() {
               JDs posted here appear on every student's dashboard.
             </p>
           </div>
-          <button className="btn-primary" onClick={() => setShowForm(!showForm)} style={{ padding: '10px 22px', fontSize: 14 }}>
-            {showForm ? '✕ Cancel' : '+ Post new JD'}
+          <button className="btn-primary" onClick={() => setShowForm(!showForm)} style={{ padding: '10px 22px', fontSize: 14, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            {showForm ? <X size={16} /> : <ArrowRight size={16} />}
+            {showForm ? 'Cancel' : 'Post new JD'}
           </button>
         </div>
 
@@ -113,8 +115,9 @@ export default function CompanyJD() {
               />
             </div>
 
-            <button className="btn-primary" onClick={handleAdd} style={{ padding: '11px 26px', fontSize: 14 }}>
-              Post JD →
+            <button className="btn-primary" onClick={handleAdd} style={{ padding: '11px 26px', fontSize: 14, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              Post JD
+              <ArrowRight size={16} />
             </button>
           </div>
         )}

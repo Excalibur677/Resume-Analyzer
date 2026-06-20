@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { Globe2, Brain, CheckCircle2, XCircle, ArrowRight } from 'lucide-react'
 
 const categories = ['DSA', 'Web Dev']
 
@@ -81,7 +82,7 @@ export default function Quiz() {
       <nav style={{
         padding: '1rem 2.5rem', borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(15,23,35,0.95)', backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)',
         position: 'sticky', top: 0, zIndex: 100,
       }}>
         <Link to="/" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff' }}>
@@ -108,7 +109,7 @@ export default function Quiz() {
             </span>
           </div>
         )}
-        <Link to="/dashboard"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>← Dashboard</button></Link>
+        <Link to="/dashboard"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>Dashboard</button></Link>
       </nav>
 
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '2.5rem 2rem' }} className="page-enter">
@@ -138,7 +139,9 @@ export default function Quiz() {
                     color: category === c ? '#8AAAFF' : 'var(--text-muted)',
                     fontSize: 15, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s',
                   }}>
-                    <div style={{ fontSize: 24, marginBottom: '0.4rem' }}>{c === 'DSA' ? '🧠' : '🌐'}</div>
+                    <div style={{ width: 40, height: 40, display: 'grid', placeItems: 'center', borderRadius: 14, marginBottom: '0.4rem', background: c === 'DSA' ? 'rgba(91,127,255,0.12)' : 'rgba(129,140,248,0.12)' }}>
+                      {c === 'DSA' ? <Brain size={22} color="var(--accent)" /> : <Globe2 size={22} color="var(--accent)" />}
+                    </div>
                     {c}
                   </button>
                 ))}
@@ -160,8 +163,9 @@ export default function Quiz() {
                 ))}
               </div>
 
-              <button className="btn-primary" onClick={() => setStep('quiz')} style={{ padding: '12px 28px', fontSize: 15 }}>
-                Start quiz →
+              <button className="btn-primary" onClick={() => setStep('quiz')} style={{ padding: '12px 28px', fontSize: 15, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                Start quiz
+                <ArrowRight size={16} />
               </button>
             </div>
           </>
@@ -206,8 +210,8 @@ export default function Quiz() {
                       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                     }}>
                       <span>{opt}</span>
-                      {locked && i === current.answer && <span>✓</span>}
-                      {locked && i === selected && i !== current.answer && <span>✗</span>}
+                      {locked && i === current.answer && <CheckCircle2 size={16} color="var(--success)" />}
+                      {locked && i === selected && i !== current.answer && <XCircle size={16} color="var(--danger)" />}
                     </button>
                   )
                 })}
@@ -253,7 +257,9 @@ export default function Quiz() {
                   borderRadius: 'var(--radius-md)', padding: '1rem 1.25rem',
                   display: 'flex', alignItems: 'flex-start', gap: '0.75rem',
                 }}>
-                  <span style={{ fontSize: 16, flexShrink: 0 }}>{r.isCorrect ? '✅' : '❌'}</span>
+                  <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center', color: r.isCorrect ? 'var(--success)' : 'var(--danger)' }}>
+                    {r.isCorrect ? <CheckCircle2 size={18} /> : <XCircle size={18} />}
+                  </span>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--text-primary)', marginBottom: '0.3rem' }}>{r.q}</div>
                     {!r.isCorrect && (
@@ -269,7 +275,9 @@ export default function Quiz() {
 
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <button className="btn-primary" onClick={reset} style={{ padding: '11px 24px', fontSize: 14 }}>Try again</button>
-              <Link to="/leaderboard"><button className="btn-ghost" style={{ padding: '11px 24px', fontSize: 14 }}>View leaderboard →</button></Link>
+              <Link to="/leaderboard"><button className="btn-ghost" style={{ padding: '11px 24px', fontSize: 14, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>View leaderboard
+                <ArrowRight size={16} />
+              </button></Link>
             </div>
           </>
         )}

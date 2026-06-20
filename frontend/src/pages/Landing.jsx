@@ -1,51 +1,52 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import { FileText, BarChart3, Mic2, Sparkles, ShieldCheck, MessageSquare, Trophy, Repeat, Building2 } from 'lucide-react'
 
 const tags = [
-  { text: 'ATS Score', type: 'accent' },
-  { text: 'Python', type: '' },
-  { text: 'Mock Interview', type: 'teal' },
-  { text: 'React', type: '' },
-  { text: 'Skill Gap Analysis', type: 'accent' },
-  { text: 'FastAPI', type: '' },
-  { text: 'DSA Practice', type: 'teal' },
-  { text: 'SQL', type: '' },
-  { text: 'Leaderboard', type: 'accent' },
-  { text: 'System Design', type: '' },
-  { text: 'Streak Tracker', type: 'teal' },
-  { text: 'Machine Learning', type: '' },
-  { text: 'Admin Reports', type: 'accent' },
-  { text: 'Node.js', type: '' },
+  { text: 'ATS score' },
+  { text: 'Python' },
+  { text: 'Mock interview' },
+  { text: 'React' },
+  { text: 'Skill gap analysis' },
+  { text: 'FastAPI' },
+  { text: 'DSA practice' },
+  { text: 'SQL' },
+  { text: 'Leaderboard' },
+  { text: 'System design' },
+  { text: 'Streak tracker' },
+  { text: 'Machine learning' },
+  { text: 'Admin reports' },
+  { text: 'Node.js' },
 ]
 
 const steps = [
   {
     num: '01',
-    icon: '📄',
+    icon: <FileText size={18} />,
     title: 'Upload resume + job description',
     desc: 'Paste or upload the JD. Tell us if it\'s a fresher role or needs experience. We handle the rest.',
   },
   {
     num: '02',
-    icon: '📊',
+    icon: <BarChart3 size={18} />,
     title: 'Get your ATS score and gaps',
     desc: 'See exactly what\'s strong, what\'s missing, and which keywords to add — a full feedback report, not just a number.',
   },
   {
     num: '03',
-    icon: '🎤',
+    icon: <Mic2 size={18} />,
     title: 'Practice JD-based mock interviews',
     desc: 'Questions generated from your actual JD. Easy, medium, or hard — with per-answer feedback and a live timer.',
   },
 ]
 
 const features = [
-  { icon: '🤖', title: 'Smart JD parsing', desc: 'Understands role depth, not just keywords.' },
-  { icon: '🎯', title: 'ATS scoring', desc: 'Resume vs JD match with clear action points.' },
-  { icon: '💬', title: 'Mock interviews', desc: 'Text-based Q&A with timer and voice support.' },
-  { icon: '🏆', title: 'Quiz battles', desc: 'DSA and Web Dev quizzes with ranked leaderboards.' },
-  { icon: '🔥', title: 'Daily streaks', desc: 'Stay consistent. Your profile tracks every day.' },
-  { icon: '🏢', title: 'Company JD portal', desc: 'Admin uploads real JDs. You practice on them directly.' },
+  { icon: <Sparkles size={18} />, title: 'Smart JD parsing', desc: 'Understands role depth, not just keywords.' },
+  { icon: <ShieldCheck size={18} />, title: 'ATS scoring', desc: 'Resume vs JD match with clear action points.' },
+  { icon: <MessageSquare size={18} />, title: 'Mock interviews', desc: 'Text-based Q&A with timer and voice support.' },
+  { icon: <Trophy size={18} />, title: 'Quiz battles', desc: 'DSA and Web Dev quizzes with ranked leaderboards.' },
+  { icon: <Repeat size={18} />, title: 'Daily streaks', desc: 'Stay consistent and build momentum.' },
+  { icon: <Building2 size={18} />, title: 'Company JD portal', desc: 'Admin uploads real JDs for student practice.' },
 ]
 
 const stats = [
@@ -67,10 +68,10 @@ export default function Landing() {
         padding: '1.2rem 2.5rem',
         borderBottom: '1px solid var(--border)',
         position: 'sticky', top: 0, zIndex: 100,
-        background: 'rgba(15,23,35,0.92)',
-        backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)',
+        backdropFilter: 'blur(10px)',
       }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff', letterSpacing: '-0.3px' }}>
+        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
           Resume<span style={{ color: 'var(--accent)' }}>AI</span>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
@@ -81,8 +82,8 @@ export default function Landing() {
 
       {/* HERO */}
       <section style={{ padding: '6rem 2rem 3rem', textAlign: 'center', maxWidth: 820, margin: '0 auto' }} className="page-enter">
-        <div className="badge badge-accent" style={{ marginBottom: '1.75rem' }}>
-          ✦ AI-powered placement preparation
+        <div className="badge badge-accent" style={{ marginBottom: '1.75rem', color: 'var(--text-primary)', background: 'rgba(155,122,87,0.08)', borderColor: 'rgba(155,122,87,0.18)' }}>
+          AI-powered placement preparation
         </div>
         <h1 style={{ fontSize: 'clamp(36px, 6vw, 58px)', fontWeight: 800, letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: '1.25rem' }}>
           Your resume.<br />Your interview.<br />
@@ -95,7 +96,7 @@ export default function Landing() {
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/register">
             <button className="btn-primary" style={{ padding: '13px 28px', fontSize: 15 }}>
-              ↑ Analyze my resume
+              Analyze my resume
             </button>
           </Link>
           <button className="btn-ghost" style={{ padding: '13px 28px', fontSize: 15 }}>
@@ -104,42 +105,20 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SCROLLING TAGS */}
-      <div style={{ overflow: 'hidden', padding: '2rem 0', position: 'relative' }}>
-        <div style={{
-          position: 'absolute', left: 0, top: 0, bottom: 0, width: 80, zIndex: 2,
-          background: 'linear-gradient(to right, var(--bg-base), transparent)',
-        }} />
-        <div style={{
-          position: 'absolute', right: 0, top: 0, bottom: 0, width: 80, zIndex: 2,
-          background: 'linear-gradient(to left, var(--bg-base), transparent)',
-        }} />
-        <div ref={trackRef} style={{
-          display: 'flex', gap: 10, width: 'max-content',
-          animation: 'scrollTags 24s linear infinite',
-        }}>
-          {[...tags, ...tags].map((tag, i) => (
-            <span key={i} style={{
-              padding: '7px 16px',
-              borderRadius: 100,
-              border: `1px solid ${tag.type === 'accent' ? 'rgba(91,127,255,0.3)' : tag.type === 'teal' ? 'rgba(45,212,160,0.25)' : 'rgba(255,255,255,0.09)'}`,
-              background: tag.type === 'accent' ? 'rgba(91,127,255,0.08)' : tag.type === 'teal' ? 'rgba(45,212,160,0.07)' : 'rgba(255,255,255,0.03)',
-              color: tag.type === 'accent' ? '#8AAAFF' : tag.type === 'teal' ? '#5ECFB0' : 'var(--text-secondary)',
-              fontSize: 13, fontWeight: 500, whiteSpace: 'nowrap',
-            }}>{tag.text}</span>
+      <section style={{ padding: '2rem 0 3rem', maxWidth: 920, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
+          {tags.map((tag, i) => (
+            <div key={i} style={{
+              padding: '0.85rem 1rem',
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-md)',
+              color: 'var(--text-secondary)',
+              fontSize: 13,
+            }}>{tag.text}</div>
           ))}
         </div>
-      </div>
-
-      {/* Add keyframe via style tag */}
-      <style>{`
-        @keyframes scrollTags {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-        .step-card:hover { border-color: rgba(91,127,255,0.35) !important; transform: translateY(-4px); }
-        .feature-cell:hover { background: var(--bg-hover) !important; }
-      `}</style>
+      </section>
 
       {/* HOW IT WORKS */}
       <section style={{ padding: '5rem 2rem', maxWidth: 1080, margin: '0 auto' }}>
@@ -159,15 +138,17 @@ export default function Landing() {
               padding: '1.75rem',
               transition: 'border-color 0.25s, transform 0.2s',
             }}>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.2, color: 'var(--accent)', marginBottom: '1rem', opacity: 0.65 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.2, color: 'var(--accent)', marginBottom: '1rem', opacity: 0.75 }}>
                 STEP {s.num}
               </div>
               <div style={{
                 width: 42, height: 42, borderRadius: 10,
-                background: 'var(--accent-soft)', display: 'flex',
+                background: 'var(--bg-surface)', display: 'flex',
                 alignItems: 'center', justifyContent: 'center',
-                fontSize: 20, marginBottom: '1rem',
-              }}>{s.icon}</div>
+                color: 'var(--accent)', marginBottom: '1rem',
+              }}>
+                {s.icon}
+              </div>
               <h3 style={{ fontSize: 15, fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{s.title}</h3>
               <p style={{ fontSize: 13.5, color: 'var(--text-muted)', lineHeight: 1.65 }}>{s.desc}</p>
             </div>
@@ -234,7 +215,7 @@ export default function Landing() {
           </p>
           <Link to="/register">
             <button className="btn-primary" style={{ padding: '13px 28px', fontSize: 15 }}>
-              → Start for free
+              Start for free
             </button>
           </Link>
         </div>
@@ -247,7 +228,7 @@ export default function Landing() {
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         fontSize: 13, color: 'var(--text-muted)',
       }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: '#fff', fontSize: 15 }}>
+        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: 'var(--text-primary)', fontSize: 15 }}>
           Resume<span style={{ color: 'var(--accent)' }}>AI</span>
         </div>
         <span>Built for college students. Backed by AI.</span>

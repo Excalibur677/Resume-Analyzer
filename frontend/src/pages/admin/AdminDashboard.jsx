@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
+import { Users2, FileText, Mic2, Activity, CheckCircle2 } from 'lucide-react'
 
 const stats = [
-  { label: 'Total Students', value: '142', icon: '👥', color: 'var(--accent)' },
-  { label: 'Active Today', value: '38', icon: '🟢', color: 'var(--success)' },
-  { label: 'Resumes Analyzed', value: '89', icon: '📄', color: 'var(--warning)' },
-  { label: 'Interviews Done', value: '54', icon: '🎤', color: '#FF6B6B' },
+  { label: 'Total Students', value: '142', icon: <Users2 size={20} />, color: 'var(--accent)' },
+  { label: 'Active Today', value: '38', icon: <CheckCircle2 size={20} />, color: 'var(--success)' },
+  { label: 'Resumes Analyzed', value: '89', icon: <FileText size={20} />, color: 'var(--warning)' },
+  { label: 'Interviews Done', value: '54', icon: <Mic2 size={20} />, color: '#FF6B6B' },
 ]
 
 const students = [
@@ -27,7 +28,7 @@ export default function AdminDashboard() {
       <nav style={{
         padding: '1rem 2.5rem', borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(15,23,35,0.95)', backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)',
         position: 'sticky', top: 0, zIndex: 100,
       }}>
         <Link to="/" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff' }}>
@@ -77,7 +78,7 @@ export default function AdminDashboard() {
               onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(91,127,255,0.35)'}
               onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
             >
-              <div style={{ fontSize: 28 }}>📊</div>
+              <div style={{ width: 44, height: 44, display: 'grid', placeItems: 'center', borderRadius: 14, background: 'rgba(155,122,87,0.12)' }}><FileText size={24} color="var(--accent)" /></div>
               <div>
                 <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>AI Student Reports</div>
                 <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>Auto-generated performance reports</div>
@@ -94,7 +95,7 @@ export default function AdminDashboard() {
               onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(91,127,255,0.35)'}
               onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
             >
-              <div style={{ fontSize: 28 }}>🏢</div>
+              <div style={{ width: 44, height: 44, display: 'grid', placeItems: 'center', borderRadius: 14, background: 'rgba(91,127,255,0.12)' }}><Activity size={24} color="var(--accent)" /></div>
               <div>
                 <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>Company JD Portal</div>
                 <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>Upload JDs for students to practice</div>
@@ -157,7 +158,7 @@ export default function AdminDashboard() {
                 }}>{s.ats}</span>
               </div>
               <div style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-secondary)' }}>{s.interviews}</div>
-              <div style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-muted)' }}>{s.streak > 0 ? `${s.streak}🔥` : '—'}</div>
+              <div style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-muted)' }}>{s.streak > 0 ? `${s.streak} days` : '—'}</div>
             </div>
           ))}
         </div>

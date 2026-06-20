@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowLeft, FileText, CheckCircle2, XCircle } from 'lucide-react'
 
 const mockResult = {
   score: 78,
@@ -78,13 +79,13 @@ export default function ResumeUpload() {
       <nav style={{
         padding: '1rem 2.5rem', borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(15,23,35,0.95)', backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)',
         position: 'sticky', top: 0, zIndex: 100,
       }}>
         <Link to="/" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff' }}>
           Resume<span style={{ color: 'var(--accent)' }}>AI</span>
         </Link>
-        <Link to="/dashboard"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>← Dashboard</button></Link>
+        <Link to="/dashboard"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>Dashboard</button></Link>
       </nav>
 
       <div style={{ maxWidth: 860, margin: '0 auto', padding: '2.5rem 2rem' }} className="page-enter">
@@ -123,13 +124,13 @@ export default function ResumeUpload() {
                     onChange={e => setFile(e.target.files[0])} />
                   {file ? (
                     <>
-                      <div style={{ fontSize: 28 }}>✅</div>
+                      <div style={{ color: 'var(--success)' }}><CheckCircle2 size={28} /></div>
                       <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--success)' }}>{file.name}</div>
                       <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Click to replace</div>
                     </>
                   ) : (
                     <>
-                      <div style={{ fontSize: 28 }}>📄</div>
+                      <div style={{ color: 'var(--text-secondary)' }}><FileText size={28} /></div>
                       <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-secondary)' }}>Drag & drop your PDF here</div>
                       <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>or click to browse</div>
                     </>
@@ -196,7 +197,7 @@ export default function ResumeUpload() {
                 opacity: (!file || !jd.trim()) ? 0.5 : 1,
                 cursor: (!file || !jd.trim()) ? 'not-allowed' : 'pointer',
               }}>
-              {loading ? '⏳ Analyzing...' : '🔍 Analyze my resume'}
+              {loading ? 'Analyzing...' : 'Analyze my resume'}
             </button>
           </>
         )}
@@ -208,8 +209,9 @@ export default function ResumeUpload() {
                 <div className="section-label">ATS Result</div>
                 <h1 style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.4px' }}>Your resume score</h1>
               </div>
-              <button className="btn-ghost" onClick={() => setStep('upload')} style={{ fontSize: 13 }}>
-                ← Analyze another
+              <button className="btn-ghost" onClick={() => setStep('upload')} style={{ fontSize: 13, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <ArrowLeft size={14} />
+                Analyze another
               </button>
             </div>
 
@@ -223,7 +225,7 @@ export default function ResumeUpload() {
               <ScoreRing score={mockResult.score} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-                  {mockResult.score >= 75 ? '✅ Strong match' : mockResult.score >= 50 ? '⚠️ Moderate match' : '❌ Weak match'}
+                  {mockResult.score >= 75 ? 'Strong match' : mockResult.score >= 50 ? 'Moderate match' : 'Weak match'}
                 </div>
                 <p style={{ fontSize: 13.5, color: 'var(--text-secondary)', lineHeight: 1.7 }}>
                   {mockResult.suggestion}
@@ -238,10 +240,10 @@ export default function ResumeUpload() {
               display: 'flex', flexDirection: 'column', gap: '1.25rem',
               marginBottom: '1.25rem',
             }}>
-              <SkillGroup title="✅ Strong in" items={mockResult.strong} badgeClass="badge-success" />
-              <SkillGroup title="⚠️ Weak or shallow" items={mockResult.weak} badgeClass="badge-warning" />
-              <SkillGroup title="❌ Missing keywords" items={mockResult.missing} badgeClass="badge-danger" />
-              <SkillGroup title="🗑️ Irrelevant to this JD" items={mockResult.irrelevant} badgeClass="badge-accent" />
+              <SkillGroup title="Strong in" items={mockResult.strong} badgeClass="badge-success" />
+              <SkillGroup title="Weak or shallow" items={mockResult.weak} badgeClass="badge-warning" />
+              <SkillGroup title="Missing keywords" items={mockResult.missing} badgeClass="badge-danger" />
+              <SkillGroup title="Irrelevant to this JD" items={mockResult.irrelevant} badgeClass="badge-accent" />
             </div>
 
             {/* NEXT STEPS */}
@@ -259,8 +261,9 @@ export default function ResumeUpload() {
                 </div>
               </div>
               <Link to="/interview">
-                <button className="btn-primary" style={{ fontSize: 13, padding: '9px 20px' }}>
-                  Start mock interview →
+                <button className="btn-primary" style={{ fontSize: 13, padding: '9px 20px', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  Start mock interview
+                  <ArrowRight size={16} />
                 </button>
               </Link>
             </div>

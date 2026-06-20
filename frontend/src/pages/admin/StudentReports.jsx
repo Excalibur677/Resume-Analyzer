@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowRight, X } from 'lucide-react'
 
 const reports = [
   {
@@ -50,14 +51,14 @@ export default function StudentReports() {
       <nav style={{
         padding: '1rem 2.5rem', borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(15,23,35,0.95)', backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)',
         position: 'sticky', top: 0, zIndex: 100,
       }}>
         <Link to="/" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff' }}>
           Resume<span style={{ color: 'var(--accent)' }}>AI</span>
           <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginLeft: 8 }}>Admin</span>
         </Link>
-        <Link to="/admin"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>← Dashboard</button></Link>
+        <Link to="/admin"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>Dashboard</button></Link>
       </nav>
 
       <div style={{ maxWidth: 1080, margin: '0 auto', padding: '2.5rem 2rem' }} className="page-enter">
@@ -115,7 +116,7 @@ export default function StudentReports() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <span className={`badge ${catColor(r.category)}`} style={{ fontSize: 11 }}>{r.category}</span>
                     <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>ATS: <b style={{ color: r.ats >= 75 ? 'var(--success)' : r.ats >= 60 ? 'var(--warning)' : 'var(--danger)' }}>{r.ats}</b></span>
-                    <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{r.streak > 0 ? `${r.streak}🔥` : '—'}</span>
+                    <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{r.streak > 0 ? `${r.streak} days` : '—'}</span>
                   </div>
                 </div>
                 <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: '0.75rem', lineHeight: 1.6 }}>{r.summary}</p>
@@ -138,7 +139,7 @@ export default function StudentReports() {
                 <button onClick={() => setSelected(null)} style={{
                   background: 'none', border: 'none', color: 'var(--text-muted)',
                   fontSize: 18, cursor: 'pointer', lineHeight: 1,
-                }}>✕</button>
+                }}><X size={18} /></button>
               </div>
 
               {/* METRICS */}
@@ -174,7 +175,7 @@ export default function StudentReports() {
               </div>
 
               <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', fontSize: 13, padding: '10px' }}>
-                ↓ Download report
+                Download report
               </button>
             </div>
           )}

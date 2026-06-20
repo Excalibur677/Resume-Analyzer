@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { Activity, ShieldCheck, AlertTriangle, ArrowRight, ArrowLeft, X } from 'lucide-react'
 
 const difficulties = ['Easy', 'Medium', 'Hard']
 
@@ -85,7 +86,7 @@ export default function MockInterview() {
       <nav style={{
         padding: '1rem 2.5rem', borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(15,23,35,0.95)', backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)',
         position: 'sticky', top: 0, zIndex: 100,
       }}>
         <Link to="/" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff' }}>
@@ -99,7 +100,7 @@ export default function MockInterview() {
             <Timer seconds={timer} max={TIMER_MAX} />
           </div>
         )}
-        <Link to="/dashboard"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>← Dashboard</button></Link>
+        <Link to="/dashboard"><button className="btn-ghost" style={{ fontSize: 13, padding: '7px 16px' }}>Dashboard</button></Link>
       </nav>
 
       <div style={{ maxWidth: 720, margin: '0 auto', padding: '2.5rem 2rem' }} className="page-enter">
@@ -133,8 +134,10 @@ export default function MockInterview() {
                     fontSize: 14, fontWeight: 600, cursor: 'pointer',
                     transition: 'all 0.2s',
                   }}>
-                    <div style={{ fontSize: 20, marginBottom: '0.35rem' }}>
-                      {d === 'Easy' ? '🟢' : d === 'Medium' ? '🟡' : '🔴'}
+                    <div style={{ width: 36, height: 36, display: 'grid', placeItems: 'center', borderRadius: 12, marginBottom: '0.35rem', background: d === 'Easy' ? 'rgba(45,212,160,0.12)' : d === 'Medium' ? 'rgba(245,166,35,0.12)' : 'rgba(255,98,113,0.12)' }}>
+                      {d === 'Easy' && <ShieldCheck size={20} color="var(--success)" />}
+                      {d === 'Medium' && <Activity size={20} color="var(--warning)" />}
+                      {d === 'Hard' && <AlertTriangle size={20} color="var(--danger)" />}
                     </div>
                     {d}
                   </button>
@@ -157,8 +160,9 @@ export default function MockInterview() {
                 ))}
               </div>
 
-              <button className="btn-primary" onClick={() => setStep('interview')} style={{ padding: '12px 28px', fontSize: 15 }}>
-                Start interview →
+              <button className="btn-primary" onClick={() => setStep('interview')} style={{ padding: '12px 28px', fontSize: 15, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                Start interview
+                <ArrowRight size={16} />
               </button>
             </div>
           </>
@@ -210,11 +214,12 @@ export default function MockInterview() {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
-              <button onClick={() => setShowHint(!showHint)} className="btn-ghost" style={{ fontSize: 13, padding: '8px 16px' }}>
-                {showHint ? '🙈 Hide hint' : '💡 Show hint'}
+              <button onClick={() => setShowHint(!showHint)} className="btn-ghost" style={{ fontSize: 13, padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                {showHint ? <X size={14} /> : <Activity size={14} />}
+                {showHint ? 'Hide hint' : 'Show hint'}
               </button>
               <button className="btn-primary" onClick={() => handleNext(false)} style={{ padding: '11px 26px', fontSize: 14 }}>
-                {isLast ? 'Submit interview ✓' : 'Next question →'}
+                {isLast ? 'Submit interview' : 'Next question'}
               </button>
             </div>
 
@@ -224,7 +229,10 @@ export default function MockInterview() {
                 background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.2)',
                 borderRadius: 'var(--radius-sm)', fontSize: 13, color: 'var(--warning)',
               }}>
-                💡 Hint: {questions[qIndex].hint}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', fontWeight: 600 }}>
+                  <AlertTriangle size={16} /> Hint
+                </div>
+                <div>{questions[qIndex].hint}</div>
               </div>
             )}
           </>
@@ -277,17 +285,21 @@ export default function MockInterview() {
                     Your answer: {answers[i] || '(skipped)'}
                   </div>
                   <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                    💬 {mockFeedback[i].comment}
+                    {mockFeedback[i].comment}
                   </div>
                 </div>
               ))}
             </div>
 
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <button className="btn-primary" onClick={() => { setStep('setup'); setQIndex(0); setAnswers({}) }} style={{ padding: '11px 24px', fontSize: 14 }}>
+              <button className="btn-primary" onClick={() => { setStep('setup'); setQIndex(0); setAnswers({}) }} style={{ padding: '11px 24px', fontSize: 14, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 Try again
+                <ArrowRight size={16} />
               </button>
-              <Link to="/quiz"><button className="btn-ghost" style={{ padding: '11px 24px', fontSize: 14 }}>Take a quiz →</button></Link>
+              <Link to="/quiz"><button className="btn-ghost" style={{ padding: '11px 24px', fontSize: 14, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                Take a quiz
+                <ArrowRight size={16} />
+              </button></Link>
             </div>
           </>
         )}

@@ -1,17 +1,18 @@
 import { Link } from 'react-router-dom'
+import { FileText, Mic2, Brain, Trophy, ArrowRight } from 'lucide-react'
 
 const stats = [
-  { label: 'Last ATS Score', value: '78', unit: '/100', color: 'var(--accent)' },
-  { label: 'Interviews Done', value: '5', unit: '', color: 'var(--success)' },
-  { label: 'Quiz Rank', value: '#12', unit: '', color: 'var(--warning)' },
-  { label: 'Day Streak', value: '7', unit: '🔥', color: '#FF6B6B' },
+  { label: 'Last ATS score', value: '78', unit: '/100', color: 'var(--accent)' },
+  { label: 'Interviews done', value: '5', unit: '', color: 'var(--success)' },
+  { label: 'Quiz rank', value: '#12', unit: '', color: 'var(--warning)' },
+  { label: 'Day streak', value: '7-day', unit: '', color: '#B84A4A' },
 ]
 
 const quickActions = [
-  { icon: '📄', label: 'Analyze Resume', desc: 'Upload resume + JD for ATS score', to: '/resume', accent: true },
-  { icon: '🎤', label: 'Mock Interview', desc: 'Practice JD-based questions', to: '/interview', accent: false },
-  { icon: '🧠', label: 'Take a Quiz', desc: 'DSA or Web Dev — ranked', to: '/quiz', accent: false },
-  { icon: '🏆', label: 'Leaderboard', desc: 'See where you rank', to: '/leaderboard', accent: false },
+  { icon: <FileText size={18} />, label: 'Analyze resume', desc: 'Upload resume + JD for ATS score', to: '/resume', accent: true },
+  { icon: <Mic2 size={18} />, label: 'Mock interview', desc: 'Practice JD-based questions', to: '/interview', accent: false },
+  { icon: <Brain size={18} />, label: 'Take a quiz', desc: 'DSA or Web Dev — ranked', to: '/quiz', accent: false },
+  { icon: <Trophy size={18} />, label: 'Leaderboard', desc: 'See where you rank', to: '/leaderboard', accent: false },
 ]
 
 const companyJDs = [
@@ -21,9 +22,9 @@ const companyJDs = [
 ]
 
 const activity = [
-  { icon: '📄', text: 'Resume analyzed for TCS Software Engineer', time: '2 hours ago', badge: '78/100', badgeType: 'accent' },
-  { icon: '🎤', text: 'Completed mock interview — Medium difficulty', time: 'Yesterday', badge: 'Done', badgeType: 'success' },
-  { icon: '🧠', text: 'Quiz: DSA — Trees & Graphs', time: '2 days ago', badge: '#12', badgeType: 'warning' },
+  { icon: <FileText size={16} color="var(--accent)" />, text: 'Resume analyzed for TCS Software Engineer', time: '2 hours ago', badge: '78/100', badgeType: 'accent' },
+  { icon: <Mic2 size={16} color="var(--success)" />, text: 'Completed mock interview — Medium difficulty', time: 'Yesterday', badge: 'Done', badgeType: 'success' },
+  { icon: <Brain size={16} color="var(--warning)" />, text: 'Quiz: DSA — Trees & Graphs', time: '2 days ago', badge: '#12', badgeType: 'warning' },
 ]
 
 export default function StudentDashboard() {
@@ -35,9 +36,9 @@ export default function StudentDashboard() {
         padding: '1rem 2.5rem', borderBottom: '1px solid var(--border)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         position: 'sticky', top: 0, zIndex: 100,
-        background: 'rgba(15,23,35,0.95)', backdropFilter: 'blur(12px)',
+        background: 'var(--navbar-bg)', backdropFilter: 'blur(10px)',
       }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: '#fff' }}>
+        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 18, color: 'var(--text-primary)' }}>
           Resume<span style={{ color: 'var(--accent)' }}>AI</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
@@ -54,7 +55,7 @@ export default function StudentDashboard() {
           ))}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>7🔥</div>
+          <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>7-day streak</div>
           <div style={{
             width: 34, height: 34, borderRadius: '50%',
             background: 'var(--accent-soft)', border: '1px solid var(--accent-border)',
@@ -69,7 +70,7 @@ export default function StudentDashboard() {
         {/* GREETING */}
         <div style={{ marginBottom: '2rem' }} className="page-enter">
           <h1 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.4px', marginBottom: '0.3rem' }}>
-            Good morning, Asad 👋
+            Good morning, Asad
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>
             You're on a 7-day streak. Keep it going today.
@@ -162,8 +163,9 @@ export default function StudentDashboard() {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
                       <span style={{ fontSize: 11.5, color: 'var(--text-muted)' }}>Deadline: {jd.deadline}</span>
                       <Link to="/resume">
-                        <button className="btn-primary" style={{ padding: '7px 16px', fontSize: 12 }}>
-                          Practice now →
+                        <button className="btn-primary" style={{ padding: '7px 16px', fontSize: 12, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                          Practice now
+                          <ArrowRight size={14} />
                         </button>
                       </Link>
                     </div>
@@ -210,7 +212,9 @@ export default function StudentDashboard() {
               borderRadius: 'var(--radius-md)', padding: '1.25rem',
               textAlign: 'center',
             }}>
-              <div style={{ fontSize: 36 }}>🔥</div>
+              <div style={{ width: 44, height: 44, display: 'grid', placeItems: 'center', margin: '0 auto 0.75rem', borderRadius: 14, background: 'rgba(255,107,107,0.12)' }}>
+                <Mic2 size={24} color="#FF6B6B" />
+              </div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, color: '#FF6B6B', margin: '0.25rem 0' }}>7 days</div>
               <div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>Complete a quiz or interview today to keep your streak alive</div>
             </div>
